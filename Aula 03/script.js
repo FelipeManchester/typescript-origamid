@@ -41,3 +41,12 @@ function toggleMenu(event) {
     }
 }
 button?.addEventListener('pointerdown', toggleMenu);
+function roundNumber(valor) {
+    if (typeof valor === 'number') {
+        return Math.ceil(valor);
+    }
+    else {
+        return Math.ceil(+valor).toString();
+    }
+}
+console.log(roundNumber('3.5'));

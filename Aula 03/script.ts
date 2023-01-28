@@ -61,3 +61,20 @@ function toggleMenu(event: PointerEvent) {
 }
 
 button?.addEventListener('pointerdown', toggleMenu)
+
+
+// Crie uma função que arredonda um valor passado para cima.
+// A função pode receber string ou number.
+// A função deve retornar o mesmo tipo que ela receber.
+
+function roundNumber(valor: number): number
+function roundNumber(valor: string): string
+function roundNumber(valor: number | string): number | string {
+  if(typeof valor === 'number') {
+    return Math.ceil(valor)
+  } else {
+    return Math.ceil(+valor).toString()
+  }
+}
+
+console.log(roundNumber('3.5'))

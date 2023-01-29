@@ -50,3 +50,35 @@ function roundNumber(valor) {
     }
 }
 console.log(roundNumber('3.5'));
+async function fetchData() {
+    const res = await fetch('https://api.origamid.dev/json/cursos.json');
+    const data = await res.json();
+    handleData(data);
+}
+fetchData();
+function isCursos(curso) {
+    if (curso &&
+        typeof curso === 'object' &&
+        'nome' in curso &&
+        'horas' in curso &&
+        'tags' in curso) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+function handleData(data) {
+    if (Array.isArray(data)) {
+        data.filter(isCursos).forEach((item) => {
+            document.body.innerHTML += `
+      <div>
+       <h1>Exercício 5</h1>
+       <h2>${item.nome}</h2>
+       <p>${item.horas}</p>
+       <p>${item.tags.join(', ')}</p>
+      </div>
+      `;
+        });
+    }
+}

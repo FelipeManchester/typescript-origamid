@@ -78,3 +78,61 @@ function roundNumber(valor: number | string): number | string {
 }
 
 console.log(roundNumber('3.5'))
+
+
+// -------------------------------------------
+// EXERCÍCIO 05
+// 1 - Faça um fetch da API: https://api.origamid.dev/json/cursos.json
+// 2 - Defina a interface da API
+// 3 - Crie um Type Guard, que garanta que a API possui nome, horas e tags
+// 4 - Use Type Guards para garantir a Type Safety do código
+// 5 - Preencha os dados da API na tela.
+
+
+interface Cursos {
+  nome: string;
+  horas: number;
+  aulas: number;
+  gratuito: boolean;
+  tags: []
+  idAulas: [];
+  nivel: string;
+}
+
+async function fetchData() {
+  const res = await fetch ('https://api.origamid.dev/json/cursos.json')
+  const data = await res.json()
+  handleData(data)
+}
+
+fetchData()
+
+function isCursos(curso: unknown): curso is Cursos {
+  if (
+    curso &&
+    typeof curso === 'object' &&
+    'nome' in curso &&
+    'horas' in curso &&
+    'tags' in curso
+  ) {
+    return true;
+  } else {
+    return false
+  }
+}
+
+function handleData(data: unknown) {
+  if(Array.isArray(data)) {
+    data.filter(isCursos).forEach((item) => {
+      document.body.innerHTML += `
+      <div>
+       <h1>Exercício 5</h1>
+       <h2>${item.nome}</h2>
+       <p>${item.horas}</p>
+       <p>${item.tags.join(', ')}</p>
+      </div>
+      `
+    })
+    
+  }
+}

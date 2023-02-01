@@ -2,11 +2,11 @@
 // 2 - Defina o tipo/interface de cada venda (tuple)
 // 3 - Some o total das vendas e mostre na tela
 
-interface DetalheVenda {
+interface SellsDetails {
   marca: string;
   cor: string;
 }
-type Vendas = [string, number, string, DetalheVenda];
+type Vendas = [string, number, string, SellsDetails];
 
 async function fetchData() {
   const res = await fetch ('https://api.origamid.dev/json/vendas.json')
